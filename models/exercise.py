@@ -22,9 +22,3 @@ class ExerciseImage(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     exercise = db.Column(db.Integer, db.ForeignKey('exercise.id'))
     image_url = db.Column(db.String(256))
-
-
-if __name__ == '__main__':
-    db.create_all()
-    Exercise().create_user(Exercise='idiot', user_profile_mobile='18939835513',
-                              user_profile_email='steve@gmail.com', password='12345646')
