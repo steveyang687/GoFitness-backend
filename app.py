@@ -1,7 +1,8 @@
 import os
 from flask import Flask
 from flask_cors import CORS
-
+from flask_login import LoginManager
+from fakes import *
 
 def create_app(config=None):
     app = Flask(__name__)
@@ -26,10 +27,15 @@ def create_app(config=None):
         elif config.endswith('.py'):
             app.config.from_pyfile(config)
 
+    app.app_context().push()
     import router
     import models
     import serializer
     router.init_app(app)
     serializer.init_app(app)
     models.init_app(app)
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+    fake_category()
+    fake_exercise()
     return app

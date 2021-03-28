@@ -10,7 +10,7 @@ class RegisterForm(Form):
     # 必填，大写，小写，数字，下划线组成的6~18位的字符串
     password = StringField(validators=[DataRequired(), Regexp(r'^\w{6,18}$', message="密码复杂度不符合要求")])
     username = StringField(validators=[DataRequired()])
-    phone = StringField(validators=[DataRequired(), Regexp(r'^1[0-9]{10}$',message="手机号码不符合要求")])
+    phone = StringField(validators=[DataRequired(), Regexp(r'^1[0-9]{10}$', message="手机号码不符合要求")])
 
     # 自定义字段检查方法(validate_你要检查的字段名)
     def validate_username(self, value):
