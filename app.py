@@ -2,7 +2,9 @@ import os
 from flask import Flask
 from flask_cors import CORS
 from flask_login import LoginManager
-from fakes import *
+from models.fakes import *
+import click
+
 
 def create_app(config=None):
     app = Flask(__name__)
@@ -36,6 +38,25 @@ def create_app(config=None):
     models.init_app(app)
     login_manager = LoginManager()
     login_manager.init_app(app)
-    fake_category()
-    fake_exercise()
+
+    # Register cli commands
+    register_commands(app)
     return app
+
+
+def register_commands(app):
+
+    @app.cli.command()
+    @click.option('--category', default=10, help='Quantity of categories, default is 10')
+    @click.option('--exercise', default=50, help='Quantity of exercises, default is 50')
+    def forge(category, exercise):
+        """Generate Fake Exercise Data"""
+        db.drop_all()
+        db.create_all()
+        click.echo('Generating %d categories...' % category)
+        fake_category(category)
+
+        click.echo('Generating %d exercises...' % exercise)
+        fake_exercise(exercise)
+
+        click.echo('Done.')

@@ -7,6 +7,7 @@ from models.exercise import *
 
 fake = Faker()
 
+
 def fake_category(count=10):
     for i in range(count):
         category = Category(name=fake.word())
