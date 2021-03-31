@@ -9,6 +9,9 @@ class UserProfile(db.Model):
     user_profile_name = db.Column(db.String(32), nullable=False, unique=True)
     user_profile_email = db.Column(db.String(32), nullable=False)
     user_profile_mobile = db.Column(db.String(11))
+    user_profile_weight = db.Column(db.Float(15))
+    user_profile_height = db.Column(db.Float(15))
+    user_profile_age = db.Column(db.Integer)
 
     # 定义密码
     _password = db.Column("password", db.String(128))
@@ -31,11 +34,15 @@ class UserProfile(db.Model):
 
     # 对模型常用的操作，都可以封装成一个类方法
     @classmethod
-    def create_user(cls, user_profile_email, user_profile_name, password, user_profile_mobile):
+    def create_user(cls, user_profile_email, user_profile_name,
+                    password, user_profile_mobile, user_height, user_weight, user_age):
         user = cls()
         user.user_profile_name = user_profile_name
         user.user_profile_email = user_profile_email
         user.user_profile_mobile = user_profile_mobile
+        user.user_profile_height = user_height
+        user.user_profile_weight = user_weight
+        user.user_profile_age = user_age
         user.password = password
         db.session.add(user)
         db.session.commit()
@@ -76,6 +83,6 @@ class APIPermission(db.Model):
 # test
 if __name__ == '__main__':
     db.create_all()
-    UserProfile().create_user(user_profile_name='idiot', user_profile_mobile='18939835513',
-                              user_profile_email='steve@gmail.com', password='12345646')
+    # UserProfile().create_user(user_profile_name='idiot', user_profile_mobile='18939835513',
+    #                           user_profile_email='steve@gmail.com', password='12345646')
     # app.run()

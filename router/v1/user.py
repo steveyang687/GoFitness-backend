@@ -36,7 +36,11 @@ class RegisterView(Resource):
             UserProfile.create_user(user_profile_email=form.email.data,
                                     user_profile_name=form.username.data,
                                     password=form.password.data,
-                                    user_profile_mobile=form.phone.data)
+                                    user_profile_mobile=form.phone.data,
+                                    user_height=form.height.data,
+                                    user_weight=form.weight.data,
+                                    user_age=form.age.data,
+                                    )
             user = UserProfile.query.filter_by(user_profile_email=data.get("email")).first()
             result = user_schema.dump(user)
             # 返回结果

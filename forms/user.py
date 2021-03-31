@@ -1,4 +1,4 @@
-from wtforms import Form, StringField, PasswordField
+from wtforms import Form, StringField, PasswordField, IntegerField, FloatField
 from wtforms.validators import DataRequired, Email, Regexp, ValidationError
 from werkzeug.security import check_password_hash
 from models.user import UserProfile
@@ -11,6 +11,9 @@ class RegisterForm(Form):
     password = StringField(validators=[DataRequired(), Regexp(r'^\w{6,18}$', message="密码复杂度不符合要求")])
     username = StringField(validators=[DataRequired()])
     phone = StringField(validators=[DataRequired(), Regexp(r'^1[0-9]{10}$', message="手机号码不符合要求")])
+    height = FloatField(validators=[DataRequired()])
+    weight = FloatField(validators=[DataRequired()])
+    age = IntegerField(validators=[DataRequired()])
 
     # 自定义字段检查方法(validate_你要检查的字段名)
     def validate_username(self, value):

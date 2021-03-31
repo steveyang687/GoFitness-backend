@@ -5,7 +5,7 @@ class APIException(HTTPException):
     # code: http返回码
     code = 500
     # message: 默认情况下，出了异常message信息
-    message = "opps!"
+    message = "oops!"
     # status_code: 默认情况下，业务状态码
     status_code = 9999
 
