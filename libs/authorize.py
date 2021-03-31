@@ -5,7 +5,6 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, BadSigna
 from libs.error_code import APIAuthorizedException, AuthorizedException, PermissionDeny
 from models.user import APIToken, UserProfile
 
-
 auth = HTTPBasicAuth()
 
 
@@ -65,6 +64,7 @@ def permission_required(func):
         # 判断是否有权限
         has_permission(user.role, url=request.path, method=request.method)
         return func(*args, **kwargs)
+
     return _dec
 
 
