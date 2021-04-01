@@ -1,4 +1,4 @@
-from models.exercise import Exercise, Category, ExerciseImage
+from models.exercise import *
 from flask import request, g
 from libs.nestable_blueprint import NestableBlueprint
 from flask_restful import Api, Resource

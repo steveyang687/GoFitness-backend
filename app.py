@@ -47,16 +47,18 @@ def create_app(config=None):
 def register_commands(app):
 
     @app.cli.command()
-    @click.option('--category', default=10, help='Quantity of categories, default is 10')
-    @click.option('--exercise', default=50, help='Quantity of exercises, default is 50')
-    def forge(category, exercise):
+    @click.option('--category_num', default=4, help='Quantity of categories, default is 10')
+    @click.option('--exercise_num', default=50, help='Quantity of exercises, default is 50')
+    def forge(category_num, exercise_num):
         """Generate Fake Exercise Data"""
         db.drop_all()
         db.create_all()
-        click.echo('Generating %d categories...' % category)
-        fake_category(category)
-
-        click.echo('Generating %d exercises...' % exercise)
-        fake_exercise(exercise)
+        click.echo('Generating %d categories...' % category_num)
+        fake_category(category_num)
+        fake_purpose(3)
+        fake_intensity(3)
+        fake_video_type(10)
+        click.echo('Generating %d exercises...' % exercise_num)
+        fake_exercise(exercise_num)
 
         click.echo('Done.')
