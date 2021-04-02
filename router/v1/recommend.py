@@ -6,6 +6,7 @@ from libs.error_code import FormValidateException, ArgsTypeException
 from models.user import UserProfile
 from libs.response import generate_response
 from serializer.user import user_schema
+from serializer.recommend import reco_schema
 from libs.authorize import auth
 import joblib
 from sklearn.tree import DecisionTreeClassifier
@@ -29,19 +30,34 @@ class RecommendView(Resource):
         if not data:
             raise ArgsTypeException(message="传参的方式不对，或没有传参")
 
-    @auth.login_required
+    # @auth.login_required
     def get(self):
         """获取用户，并返回用户信息"""
-        user = UserProfile.query.get(g.user["uid"])
+        # user = UserProfile.query.get(g.user["uid"])
+        user = UserProfile.query.get(1)
         weight = user.user_profile_weight
         height = user.user_profile_height
         age = user.user_profile_age
         sample = [[0, age, height, weight]]
         sample = transformer.transform(sample)
         user_type = classifier.predict(sample)[0]
-        user_dict = user_schema.dump(user_type)
 
-        return generate_response(data=user_dict)
+        videos = Exercise.query.filter_by(video_type_id=user_type).limit(3)
+        recommends = {'user_type': user_type}
+        temp = {}
+        for i in range(3):
+            temp[i] = {
+                'exercise_name': videos[i].exercise_name,
+                'exercise_length': videos[i].exercise_length,
+                'description': videos[i].description,
+                'video_link': videos[i].video_link,
+                'image_url': videos[i].image_url,
+                'category_id': videos[i].category_id
+            }
+        recommends['recommend'] = temp
+        # reco_dict = reco_schema.dump(recommends)
+
+        return generate_response(data=recommends)
 
 
 api.add_resource(RecommendView, '/')

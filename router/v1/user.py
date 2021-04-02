@@ -63,8 +63,9 @@ class LoginView(Resource):
         # validate函数返回了合法的用户
         user = form.validate()
         # 生成token
+        pic = "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1016301861,2773103463&fm=26&gp=0.jpg"
         token = create_token(uid=user.user_profile_id)
-        return generate_response(data={"token": token})
+        return generate_response(data={"token": token, "pic": pic})
 
 
 class UserView(Resource):
@@ -76,6 +77,13 @@ class UserView(Resource):
         user_dict[
             "avatar"] = "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1016301861,2773103463&fm=26&gp=0.jpg"
         return generate_response(data=user_dict)
+
+
+# class ImageUrl(Resource):
+#     def post(self):
+#         pic = "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1016301861,2773103463&fm=26&gp=0.jpg"
+#         user_dict = user_schema.dump(user)
+#         return generate_response(data=user_dict)
 
 
 # @app.route("/api/v1/check_token/")
@@ -93,3 +101,4 @@ class UserView(Resource):
 api.add_resource(RegisterView, 'register/')
 api.add_resource(LoginView, 'login/')
 api.add_resource(UserView, '/')
+# api.add_resource(ImageUrl, "/images")
