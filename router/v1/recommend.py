@@ -13,10 +13,9 @@ from sklearn.tree import DecisionTreeClassifier
 raw = joblib.load("classifier/model.pkl")
 classifier = raw['classifier']
 transformer = raw['transform']
-# usertype = classifier.predict([[0, 60, 160, 56]])[0]
-sample = [[1,46,165.205127,70.944630]]
-sample = transformer.transform(sample)
-usertype = classifier.predict(sample)[0]
+# sample = [[1,46,165.205127,70.944630]]
+# sample = transformer.transform(sample)
+# usertype = classifier.predict(sample)[0]
 
 
 recommend_bp = NestableBlueprint('reco_v1', __name__, url_prefix='recommend/')

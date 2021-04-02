@@ -12,7 +12,7 @@ class UserProfile(db.Model):
     user_profile_weight = db.Column(db.Float(15))
     user_profile_height = db.Column(db.Float(15))
     user_profile_age = db.Column(db.Integer)
-    user_profile_gender = db.Column(db.Boolean)
+    # user_profile_gender = db.Column(db.Boolean)
 
     # 定义密码
     _password = db.Column("password", db.String(128))
