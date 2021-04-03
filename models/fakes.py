@@ -13,6 +13,7 @@ purpose = ["lose weight", "keep fit", "muscle"]
 intensity = ["low", "medium", "high"]
 video_type = [i for i in range(10)]
 
+
 def fake_category(count=4):
     for i in range(count):
         category = Category(name=fake.word())
@@ -21,6 +22,7 @@ def fake_category(count=4):
             db.session.commit()
         except IntegrityError:
             db.session.rollback()
+
 
 def fake_purpose(count=3):
     for i in range(count):
@@ -31,6 +33,7 @@ def fake_purpose(count=3):
         except IntegrityError:
             db.session.rollback()
 
+
 def fake_intensity(count=3):
     for i in range(count):
         intensity_temp = Intensity(name=intensity[i])
@@ -40,6 +43,7 @@ def fake_intensity(count=3):
         except IntegrityError:
             db.session.rollback()
 
+
 def fake_video_type(count=10):
     for i in range(count):
         video_type_temp = VideoType(name=str(video_type[i]))
@@ -48,6 +52,7 @@ def fake_video_type(count=10):
             db.session.commit()
         except IntegrityError:
             db.session.rollback()
+
 
 def fake_exercise(count=50):
     for i in range(count):

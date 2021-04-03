@@ -13,7 +13,7 @@ class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     exercise_name = db.Column(db.String(100), nullable=False, unique=True)
     exercise_length = db.Column(db.String(50), nullable=False)  # in minutes
-    description = db.Column(db.String(256))
+    description = db.Column(db.String(1024))
     video_link = db.Column(db.String(256))  # 视频
     image_url = db.Column(db.String(256))
 
@@ -26,6 +26,7 @@ class Exercise(db.Model):
 class Purpose(db.Model):
     __tablename__ = "purpose"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    no = db.Column(db.Integer)
     name = db.Column(db.String(100), nullable=False)
     exercise = db.relationship('Exercise', backref='purpose')
 
@@ -33,6 +34,7 @@ class Purpose(db.Model):
 class Intensity(db.Model):
     __tablename__ = "intensity"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    no = db.Column(db.Integer)
     name = db.Column(db.String(100), nullable=False)
     exercise = db.relationship('Exercise', backref='intensity')
 
@@ -40,5 +42,6 @@ class Intensity(db.Model):
 class VideoType(db.Model):
     __tablename__ = "video_type"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    no = db.Column(db.Integer)
     name = db.Column(db.String(100), nullable=False)
     exercise = db.relationship('Exercise', backref='video_type')

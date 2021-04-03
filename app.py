@@ -3,6 +3,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_login import LoginManager
 from models.fakes import *
+from models.loader import data_load, generate_helping_tables
 import click
 
 
@@ -61,4 +62,14 @@ def register_commands(app):
         click.echo('Generating %d exercises...' % exercise_num)
         fake_exercise(exercise_num)
 
+        click.echo('Done.')
+
+    @app.cli.command()
+    @click.option('--path', default="videodata.csv", help='Quantity of categories, default is 10')
+    def load_data(path):
+        db.drop_all()
+        db.create_all()
+        click.echo('Loading from %s ...' % path)
+        generate_helping_tables()
+        data_load(path)
         click.echo('Done.')
