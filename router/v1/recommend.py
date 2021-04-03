@@ -34,7 +34,9 @@ class RecommendView(Resource):
     def get(self):
         """获取用户，并返回用户信息"""
         # user = UserProfile.query.get(g.user["uid"])
-        user = UserProfile.query.get(1)
+        data = request.json
+        user_name = data['user_name']
+        user = UserProfile.query.filter_by(user_profile_name=user_name).limit(1)[0]
         weight = user.user_profile_weight
         height = user.user_profile_height
         age = user.user_profile_age
