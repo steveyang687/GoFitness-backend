@@ -23,6 +23,10 @@ class Exercise(db.Model):
     video_type_id = db.Column(db.Integer, db.ForeignKey('video_type.id'))
 
 
+
+    advertise_charge = db.Column(db.Float)
+
+
 class Purpose(db.Model):
     __tablename__ = "purpose"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

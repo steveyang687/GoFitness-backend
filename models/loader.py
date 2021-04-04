@@ -56,6 +56,7 @@ def data_load(path="../videodata.csv"):
                                 description=row[6],
                                 video_link=row[7],
                                 exercise_length=row[8],
+                                advertise_charge=float(row[9])
                                 )
             db.session.add(exercise)
             # db.session.commit()

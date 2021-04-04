@@ -14,6 +14,11 @@ class UserProfile(db.Model):
     user_profile_age = db.Column(db.Integer)
     # user_profile_gender = db.Column(db.Boolean)
 
+    prefer_1 = db.Column(db.Integer, default=0)
+    prefer_2 = db.Column(db.Integer, default=0)
+    prefer_3 = db.Column(db.Integer, default=0)
+    prefer_4 = db.Column(db.Integer, default=0)
+
     # 定义密码
     _password = db.Column("password", db.String(128))
     api_tokens = db.relationship("APIToken", backref="user_profile")
