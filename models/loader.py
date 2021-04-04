@@ -58,11 +58,11 @@ def data_load(path="../videodata.csv"):
                                 exercise_length=row[8],
                                 )
             db.session.add(exercise)
-            db.session.commit()
-            # try:
-            #     db.session.commit()
-            # except IntegrityError:
-            #     db.session.rollback()
+            # db.session.commit()
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
 
 
 # data_load()
