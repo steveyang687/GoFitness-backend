@@ -83,10 +83,11 @@ class RecommendView(Resource):
                     'description': video.description,
                     'video_link': video.video_link,
                     'image_url': video.image_url,
-                    'category_id': video.category_id
+                    'category': Category.query.get(video.category_id).name
                 }
                 i += 1
-
+            if i == 6:
+                break
         recommends['recommend'] = temp
         # reco_dict = reco_schema.dump(recommends)
 
