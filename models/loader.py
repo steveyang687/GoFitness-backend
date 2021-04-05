@@ -54,10 +54,10 @@ def data_load(path="../videodata.csv"):
                                 intensity_id=Intensity.query.filter_by(name=intensity_dict[int(row[4])]).one().id,
                                 exercise_name=row[5],
                                 description=row[6],
-                                video_link=row[7],
-                                exercise_length=row[8],
-                                advertise_charge=float(row[9]),
-                                image_url=row[10]
+                                image_url=row[7],
+                                video_link=row[8],
+                                exercise_length=row[9],
+                                advertise_charge=float(row[10]),
                                 )
             db.session.add(exercise)
             # db.session.commit()
