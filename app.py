@@ -5,13 +5,16 @@ from flask_login import LoginManager
 from models.fakes import *
 from models.loader import data_load, generate_helping_tables
 import click
+import logging
 
 
 def create_app(config=None):
     app = Flask(__name__)
     # 配置跨域资源共享
     cors = CORS(app, resources={'*': {'origins': '*'}})
-
+    logging.getLogger('flask_cors').level = logging.DEBUG
+    handler = logging.FileHandler('flask.log')
+    app.logger.addHandler(handler)
     # load default configuration
     app.config.from_object('config.settings')
     # app.config.from_object('config.secure')
