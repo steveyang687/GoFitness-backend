@@ -11,7 +11,7 @@ import logging
 def create_app(config=None):
     app = Flask(__name__)
     # 配置跨域资源共享
-    cors = CORS(app, resources={'*': {'origins': '*'}})
+    cors = CORS(app, resources={'*': {'origins': '*'}}, allow_headers='Content-Type')
     logging.getLogger('flask_cors').level = logging.DEBUG
     handler = logging.FileHandler('flask.log')
     app.logger.addHandler(handler)
